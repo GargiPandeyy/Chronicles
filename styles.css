@@ -476,6 +476,123 @@ body::before {
     max-width: 800px;
 }
 
+.museum-section {
+    padding: 20px;
+}
+
+.museum-header {
+    text-align: center;
+    margin-bottom: 30px;
+    border-bottom: 2px solid var(--terminal-amber);
+    padding-bottom: 20px;
+}
+
+.museum-stats {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 15px;
+}
+
+.stat-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+}
+
+.stat-label {
+    color: var(--terminal-gray);
+    font-size: var(--font-size-small);
+}
+
+.stat-value {
+    color: var(--terminal-cyan);
+    font-size: var(--font-size-large);
+    font-weight: bold;
+}
+
+.era-section {
+    margin-bottom: 30px;
+    padding: 20px;
+    border: 2px solid var(--terminal-blue);
+    background: rgba(0, 128, 255, 0.05);
+}
+
+.era-section.locked {
+    border-color: var(--terminal-gray);
+    background: rgba(128, 128, 128, 0.05);
+    opacity: 0.6;
+}
+
+.era-section.current {
+    border-color: var(--terminal-green);
+    background: rgba(0, 255, 0, 0.05);
+}
+
+.era-title {
+    color: var(--terminal-blue);
+    margin-bottom: 10px;
+    font-size: var(--font-size-large);
+}
+
+.era-section.locked .era-title {
+    color: var(--terminal-gray);
+}
+
+.era-section.current .era-title {
+    color: var(--terminal-green);
+}
+
+.era-description {
+    color: var(--terminal-white);
+    margin-bottom: 15px;
+    line-height: 1.5;
+}
+
+.fragments-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 15px;
+    margin-top: 15px;
+}
+
+.fragment-card {
+    background: var(--terminal-dark-gray);
+    border: 1px solid var(--terminal-green);
+    padding: 15px;
+    border-radius: 5px;
+}
+
+.fragment-title {
+    color: var(--terminal-amber);
+    font-weight: bold;
+    margin-bottom: 10px;
+    font-size: var(--font-size-small);
+}
+
+.fragment-code {
+    background: var(--terminal-bg);
+    border: 1px solid var(--terminal-cyan);
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 3px;
+}
+
+.fragment-code pre {
+    color: var(--terminal-cyan);
+    font-family: var(--font-mono);
+    font-size: 11px;
+    margin: 0;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+}
+
+.fragment-description {
+    color: var(--terminal-gray);
+    font-size: var(--font-size-small);
+    line-height: 1.4;
+}
+
 /* Responsive Design */
 @media (max-width: 768px) {
     .game-main {

@@ -537,7 +537,117 @@ function resetProgress() {
 }
 
 function showMuseum() {
-    console.log('museum view - to be implemented');
+    const modal = document.getElementById('museum-modal');
+    const museumContent = document.getElementById('museum-content');
+    
+    // build museum content
+    museumContent.innerHTML = buildMuseumContent();
+    
+    // show modal
+    modal.classList.remove('hidden');
+    
+    // add close functionality
+    const closeBtn = document.getElementById('close-museum');
+    closeBtn.onclick = function() {
+        modal.classList.add('hidden');
+    };
+    
+    // close on click outside
+    modal.onclick = function(e) {
+        if (e.target === modal) {
+            modal.classList.add('hidden');
+        }
+    };
+}
+
+function buildMuseumContent() {
+    let content = '<div class="museum-section">';
+    
+    // museum header
+    content += `
+        <div class="museum-header">
+            <h2 style="color: #ffb000; text-align: center; margin-bottom: 20px;">🏛️ Code Artifact Museum</h2>
+            <div class="museum-stats">
+                <div class="stat-item">
+                    <span class="stat-label">Total Fragments:</span>
+                    <span class="stat-value">${fragmentsFound.length}</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">Score:</span>
+                    <span class="stat-value">${score}</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">Accuracy:</span>
+                    <span class="stat-value">${getAccuracyPercentage()}%</span>
+                </div>
+            </div>
+        </div>
+    `;
+    
+    // era sections
+    const eraOrder = ['fortran', 'c', 'python'];
+    eraOrder.forEach(era => {
+        if (eraData[era]) {
+            content += buildEraSection(era);
+        }
+    });
+    
+    content += '</div>';
+    return content;
+}
+
+function buildEraSection(era) {
+    const eraInfo = eraData[era];
+    const isUnlocked = unlockedEras.includes(era);
+    const isCurrentEra = era === currentEra;
+    
+    let sectionClass = 'era-section';
+    if (!isUnlocked) sectionClass += ' locked';
+    if (isCurrentEra) sectionClass += ' current';
+    
+    let content = `
+        <div class="${sectionClass}">
+            <h3 class="era-title">
+                ${eraInfo.name} (${eraInfo.year})
+                ${isCurrentEra ? ' - Current Era' : ''}
+                ${!isUnlocked ? ' - Locked' : ''}
+            </h3>
+            <p class="era-description">${eraInfo.description}</p>
+    `;
+    
+    if (isUnlocked) {
+        content += `
+            <div class="era-fragments">
+                <h4>Code Fragments:</h4>
+                <div class="fragments-grid">
+        `;
+        
+        // show fragments for this era
+        eraInfo.fragments.forEach((fragment, index) => {
+            content += `
+                <div class="fragment-card">
+                    <div class="fragment-title">${fragment.title}</div>
+                    <div class="fragment-code">
+                        <pre>${fragment.code}</pre>
+                    </div>
+                    <div class="fragment-description">${fragment.description}</div>
+                </div>
+            `;
+        });
+        
+        content += `
+                </div>
+            </div>
+        `;
+    }
+    
+    content += '</div>';
+    return content;
+}
+
+function getAccuracyPercentage() {
+    if (statistics.totalQuestionsAnswered === 0) return 0;
+    return Math.round((statistics.correctAnswers / statistics.totalQuestionsAnswered) * 100);
 }
 
 function showHelp() {
