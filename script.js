@@ -508,6 +508,9 @@ function loadGameProgress() {
             console.log('error loading progress:', e);
         }
     }
+    
+    // update era buttons after loading
+    setTimeout(updateEraButtons, 200);
 }
 
 function saveGameProgress() {
