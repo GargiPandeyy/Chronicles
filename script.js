@@ -426,7 +426,58 @@ function updateProgressBar() {
         progressText.textContent = `Found ${found} of ${total} fragments`;
     } else {
         progressText.textContent = 'All fragments found! Era complete!';
+        // check if we can unlock next era
+        checkEraUnlocking();
     }
+}
+
+function checkEraUnlocking() {
+    const eraOrder = ['fortran', 'c', 'python'];
+    const currentIndex = eraOrder.indexOf(currentEra);
+    
+    if (currentIndex < eraOrder.length - 1) {
+        const nextEra = eraOrder[currentIndex + 1];
+        if (!unlockedEras.includes(nextEra)) {
+            unlockedEras.push(nextEra);
+            showEraUnlockedNotification(nextEra);
+            saveGameProgress();
+        }
+    }
+}
+
+function showEraUnlockedNotification(nextEra) {
+    const notification = document.createElement('div');
+    notification.innerHTML = `
+        <div style="text-align: center;">
+            <h3 style="color: #ffb000; margin-bottom: 10px;">🎉 New Era Unlocked!</h3>
+            <p style="color: #00ffff; font-size: 18px;">${getEraDisplayName(nextEra)}</p>
+            <p style="color: #ffffff; margin-top: 10px;">You can now explore the next programming era!</p>
+        </div>
+    `;
+    notification.style.cssText = `
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background: rgba(0, 0, 0, 0.95);
+        color: #00ff00;
+        padding: 30px;
+        border: 3px solid #ffb000;
+        font-family: 'Courier New', monospace;
+        z-index: 3000;
+        max-width: 400px;
+        text-align: center;
+        box-shadow: 0 0 30px rgba(255, 176, 0, 0.5);
+    `;
+    
+    document.body.appendChild(notification);
+    
+    // remove notification after 4 seconds
+    setTimeout(function() {
+        if (notification.parentNode) {
+            notification.parentNode.removeChild(notification);
+        }
+    }, 4000);
 }
 
 function loadGameProgress() {
