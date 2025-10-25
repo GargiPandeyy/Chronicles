@@ -1,5 +1,3 @@
-// Code Archaeology Game - Main JavaScript File
-
 // game state variables
 let currentEra = 'fortran';
 let eraData = {};

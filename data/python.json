@@ -1,0 +1,234 @@
+{
+  "name": "Python",
+  "year": "1991",
+  "description": "A high-level, interpreted programming language created by Guido van Rossum. Known for its simplicity, readability, and versatility.",
+  "keyFeatures": [
+    "Simple, readable syntax",
+    "Interpreted language (no compilation needed)",
+    "Object-oriented and functional programming support",
+    "Extensive standard library",
+    "Cross-platform compatibility",
+    "Dynamic typing",
+    "Indentation-based code structure"
+  ],
+  "historicalContext": "Python was created by Guido van Rossum at CWI in the Netherlands. He wanted a language that was easy to read and write, inspired by ABC language. Python's philosophy emphasizes code readability and simplicity, making programming accessible to beginners while remaining powerful for experts.",
+  "totalFragments": 12,
+  "fragments": [
+    {
+      "id": 1,
+      "title": "Hello World Program",
+      "code": "print(\"Hello World\")",
+      "language": "python",
+      "description": "Python's Hello World - just one line! Compare this to FORTRAN's multi-line structure.",
+      "question": {
+        "text": "What makes Python's Hello World so simple compared to older languages?",
+        "options": [
+          "No need for main functions or complex structure",
+          "Built-in print function",
+          "Automatic memory management",
+          "All of the above"
+        ],
+        "correct": 3,
+        "explanation": "Python's simplicity comes from multiple factors: no main() function required, built-in print() function, automatic memory management, and clean syntax. This made programming much more accessible to beginners."
+      }
+    },
+    {
+      "id": 2,
+      "title": "Variable Assignment",
+      "code": "name = \"Alice\"\nage = 25\nheight = 5.6\nis_student = True",
+      "language": "python",
+      "description": "Python variables - no type declarations needed! The interpreter figures out the type automatically.",
+      "question": {
+        "text": "What is dynamic typing in Python?",
+        "options": [
+          "Variables can change type during execution",
+          "Code runs faster than static typing",
+          "Variables must be declared before use",
+          "Only numbers can be stored in variables"
+        ],
+        "correct": 0,
+        "explanation": "Dynamic typing means variables can change type during execution. You can assign a string to a variable, then later assign a number to the same variable. This flexibility makes Python easier to use but requires careful programming."
+      }
+    },
+    {
+      "id": 3,
+      "title": "For Loop with Range",
+      "code": "for i in range(1, 11):\n    print(i)",
+      "language": "python",
+      "description": "Python's for loop - much more intuitive than C's for loop or FORTRAN's DO loop.",
+      "question": {
+        "text": "What does range(1, 11) generate in Python?",
+        "options": [
+          "Numbers from 1 to 10",
+          "Numbers from 1 to 11",
+          "Numbers from 0 to 10",
+          "Numbers from 0 to 11"
+        ],
+        "correct": 0,
+        "explanation": "range(1, 11) generates numbers from 1 to 10 (inclusive start, exclusive end). This 'inclusive start, exclusive end' pattern is common in Python and makes loops more intuitive."
+      }
+    },
+    {
+      "id": 4,
+      "title": "If-Elif-Else Statement",
+      "code": "score = 85\n\nif score >= 90:\n    grade = \"A\"\nelif score >= 80:\n    grade = \"B\"\nelif score >= 70:\n    grade = \"C\"\nelse:\n    grade = \"F\"",
+      "language": "python",
+      "description": "Python's conditional statements with elif (else-if). Notice the indentation instead of curly braces.",
+      "question": {
+        "text": "What does Python use instead of curly braces {} for code blocks?",
+        "options": [
+          "Indentation (spaces/tabs)",
+          "Parentheses ()",
+          "Square brackets []",
+          "Angle brackets <>"
+        ],
+        "correct": 0,
+        "explanation": "Python uses indentation (spaces or tabs) to define code blocks instead of curly braces. This forces consistent formatting and makes code more readable, but requires careful attention to spacing."
+      }
+    },
+    {
+      "id": 5,
+      "title": "Function Definition",
+      "code": "def add_numbers(a, b):\n    return a + b\n\nresult = add_numbers(5, 3)\nprint(result)",
+      "language": "python",
+      "description": "Python functions with the def keyword. No return type declaration needed!",
+      "question": {
+        "text": "What does 'def' mean in Python?",
+        "options": [
+          "Define a function",
+          "Define a variable",
+          "Define a class",
+          "Define a module"
+        ],
+        "correct": 0,
+        "explanation": "'def' is Python's keyword for defining functions. It's short for 'define' and makes function creation simple and readable. No need to specify return types or parameter types like in C or Java."
+      }
+    },
+    {
+      "id": 6,
+      "title": "List Operations",
+      "code": "fruits = [\"apple\", \"banana\", \"orange\"]\nfruits.append(\"grape\")\nfruits[0] = \"kiwi\"\nprint(len(fruits))",
+      "language": "python",
+      "description": "Python lists - dynamic arrays that can grow and shrink. Much more flexible than C arrays.",
+      "question": {
+        "text": "What makes Python lists different from C arrays?",
+        "options": [
+          "They can change size dynamically",
+          "They can hold different data types",
+          "They have built-in methods",
+          "All of the above"
+        ],
+        "correct": 3,
+        "explanation": "Python lists are much more flexible than C arrays: they can grow/shrink dynamically, hold different data types in the same list, and have built-in methods like append(), len(), etc. This makes programming much easier."
+      }
+    },
+    {
+      "id": 7,
+      "title": "Dictionary",
+      "code": "person = {\n    \"name\": \"Alice\",\n    \"age\": 25,\n    \"city\": \"New York\"\n}\n\nprint(person[\"name\"])\nperson[\"job\"] = \"Engineer\"",
+      "language": "python",
+      "description": "Python dictionaries - key-value pairs for storing structured data. Like a mini-database in memory.",
+      "question": {
+        "text": "What is a dictionary in Python?",
+        "options": [
+          "A collection of key-value pairs",
+          "A list of words",
+          "A type of function",
+          "A way to import modules"
+        ],
+        "correct": 0,
+        "explanation": "A dictionary is a collection of key-value pairs, like a real dictionary where you look up a word (key) to find its definition (value). This data structure is incredibly useful for organizing and accessing data."
+      }
+    },
+    {
+      "id": 8,
+      "title": "List Comprehension",
+      "code": "numbers = [1, 2, 3, 4, 5]\nsquares = [x**2 for x in numbers]\neven_numbers = [x for x in numbers if x % 2 == 0]",
+      "language": "python",
+      "description": "List comprehensions - Python's elegant way to create lists. One line instead of a loop!",
+      "question": {
+        "text": "What is a list comprehension in Python?",
+        "options": [
+          "A concise way to create lists",
+          "A way to sort lists",
+          "A method to delete list items",
+          "A way to copy lists"
+        ],
+        "correct": 0,
+        "explanation": "List comprehensions are a concise, Pythonic way to create lists. Instead of writing a for loop, you can create a list in one line. This makes code more readable and often faster."
+      }
+    },
+    {
+      "id": 9,
+      "title": "Class Definition",
+      "code": "class Person:\n    def __init__(self, name, age):\n        self.name = name\n        self.age = age\n    \n    def greet(self):\n        return f\"Hello, I'm {self.name}\"\n\nperson = Person(\"Alice\", 25)\nprint(person.greet())",
+      "language": "python",
+      "description": "Python classes - object-oriented programming made simple. Notice the self parameter and __init__ method.",
+      "question": {
+        "text": "What does __init__ do in a Python class?",
+        "options": [
+          "Initializes the object when created",
+          "Destroys the object",
+          "Prints the object",
+          "Copies the object"
+        ],
+        "correct": 0,
+        "explanation": "__init__ is Python's constructor method - it's called automatically when you create a new object. It sets up the object's initial state with the values you provide."
+      }
+    },
+    {
+      "id": 10,
+      "title": "Exception Handling",
+      "code": "try:\n    number = int(input(\"Enter a number: \"))\n    result = 10 / number\n    print(f\"Result: {result}\")\nexcept ValueError:\n    print(\"That's not a valid number!\")\nexcept ZeroDivisionError:\n    print(\"Cannot divide by zero!\")\nexcept Exception as e:\n    print(f\"An error occurred: {e}\")",
+      "language": "python",
+      "description": "Python exception handling - graceful error management. Much cleaner than C's error codes.",
+      "question": {
+        "text": "What is the purpose of try-except in Python?",
+        "options": [
+          "To handle errors gracefully",
+          "To make code run faster",
+          "To create loops",
+          "To define functions"
+        ],
+        "correct": 0,
+        "explanation": "try-except allows you to handle errors gracefully instead of crashing. If something goes wrong in the try block, Python jumps to the except block and continues running instead of stopping the program."
+      }
+    },
+    {
+      "id": 11,
+      "title": "File Operations",
+      "code": "with open(\"data.txt\", \"r\") as file:\n    content = file.read()\n    print(content)\n\nwith open(\"output.txt\", \"w\") as file:\n    file.write(\"Hello from Python!\")",
+      "language": "python",
+      "description": "Python file operations with the 'with' statement. Automatic file closing - no need to remember to close files!",
+      "question": {
+        "text": "What is the advantage of using 'with' for file operations?",
+        "options": [
+          "Files are automatically closed",
+          "Files open faster",
+          "Files can hold more data",
+          "Files are automatically saved"
+        ],
+        "correct": 0,
+        "explanation": "The 'with' statement automatically closes files when you're done, even if an error occurs. This prevents memory leaks and file locks - a common problem in C where you had to remember to close files manually."
+      }
+    },
+    {
+      "id": 12,
+      "title": "Lambda Functions",
+      "code": "numbers = [1, 2, 3, 4, 5]\nsquares = list(map(lambda x: x**2, numbers))\neven_numbers = list(filter(lambda x: x % 2 == 0, numbers))",
+      "language": "python",
+      "description": "Lambda functions - anonymous functions for quick operations. Functional programming concepts in Python.",
+      "question": {
+        "text": "What is a lambda function in Python?",
+        "options": [
+          "A small anonymous function",
+          "A large complex function",
+          "A function that returns numbers",
+          "A function that handles errors"
+        ],
+        "correct": 0,
+        "explanation": "Lambda functions are small, anonymous functions that you can define in one line. They're perfect for simple operations like squaring numbers or filtering lists. This brings functional programming concepts to Python."
+      }
+    }
+  ]
+}
