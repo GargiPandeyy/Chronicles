@@ -549,8 +549,75 @@ document.addEventListener('DOMContentLoaded', function() {
         const museumBtn = document.getElementById('museum-btn');
         const helpBtn = document.getElementById('help-btn');
         
+        // era navigation buttons
+        const fortranBtn = document.getElementById('era-fortran');
+        const cBtn = document.getElementById('era-c');
+        const pythonBtn = document.getElementById('era-python');
+        
         if (resetBtn) resetBtn.addEventListener('click', resetProgress);
         if (museumBtn) museumBtn.addEventListener('click', showMuseum);
         if (helpBtn) helpBtn.addEventListener('click', showHelp);
+        
+        // era navigation
+        if (fortranBtn) fortranBtn.addEventListener('click', () => switchEra('fortran'));
+        if (cBtn) cBtn.addEventListener('click', () => switchEra('c'));
+        if (pythonBtn) pythonBtn.addEventListener('click', () => switchEra('python'));
+        
+        // update era button states
+        updateEraButtons();
     }, 100);
 });
+
+function switchEra(newEra) {
+    if (!unlockedEras.includes(newEra)) {
+        console.log(`era ${newEra} is locked`);
+        return;
+    }
+    
+    // save current progress
+    saveGameProgress();
+    
+    // switch to new era
+    currentEra = newEra;
+    currentEraData = eraData[currentEra];
+    totalFragments = currentEraData.totalFragments;
+    
+    // reset fragments found for new era
+    fragmentsFound = [];
+    
+    // recreate dig site grid
+    createDigSiteGrid();
+    
+    // update display
+    updateDisplay();
+    updateEraButtons();
+    
+    console.log(`switched to era: ${newEra}`);
+}
+
+function updateEraButtons() {
+    const fortranBtn = document.getElementById('era-fortran');
+    const cBtn = document.getElementById('era-c');
+    const pythonBtn = document.getElementById('era-python');
+    
+    const buttons = [
+        { btn: fortranBtn, era: 'fortran' },
+        { btn: cBtn, era: 'c' },
+        { btn: pythonBtn, era: 'python' }
+    ];
+    
+    buttons.forEach(({ btn, era }) => {
+        if (btn) {
+            // remove all classes
+            btn.classList.remove('active', 'locked');
+            
+            if (unlockedEras.includes(era)) {
+                if (era === currentEra) {
+                    btn.classList.add('active');
+                }
+            } else {
+                btn.classList.add('locked');
+            }
+        }
+    });
+}
