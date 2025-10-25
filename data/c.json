@@ -1,0 +1,233 @@
+{
+  "name": "C",
+  "year": "1972",
+  "description": "A general-purpose programming language developed by Dennis Ritchie at Bell Labs. Known for its efficiency and portability.",
+  "keyFeatures": [
+    "System programming language",
+    "Portable across different computer architectures", 
+    "Low-level access to memory and hardware",
+    "Structured programming with functions",
+    "Pointer arithmetic and memory management",
+    "Influenced many modern languages (C++, Java, C#, Go, etc.)"
+  ],
+  "historicalContext": "C was created by Dennis Ritchie at Bell Labs to rewrite the UNIX operating system. Before C, operating systems were written in assembly language, making them tied to specific hardware. C made UNIX portable across different computers, revolutionizing software development.",
+  "totalFragments": 12,
+  "fragments": [
+    {
+      "id": 1,
+      "title": "Hello World Program",
+      "code": "#include <stdio.h>\n\nint main() {\n    printf(\"Hello World\\n\");\n    return 0;\n}",
+      "language": "c",
+      "description": "The classic C program. Note the #include directive and main() function.",
+      "question": {
+        "text": "What does #include <stdio.h> do in C?",
+        "options": [
+          "Includes standard input/output functions",
+          "Includes mathematical functions",
+          "Includes string manipulation functions",
+          "Includes graphics functions"
+        ],
+        "correct": 0,
+        "explanation": "#include <stdio.h> includes the standard input/output library, which provides functions like printf() and scanf(). This was C's way of organizing code into reusable libraries."
+      }
+    },
+    {
+      "id": 2,
+      "title": "Variable Declaration",
+      "code": "int age = 25;\nfloat temperature = 98.6;\nchar grade = 'A';\ndouble pi = 3.14159;",
+      "language": "c",
+      "description": "C variable declarations with explicit data types. Much more flexible than FORTRAN's fixed types.",
+      "question": {
+        "text": "What is the difference between float and double in C?",
+        "options": [
+          "double has higher precision than float",
+          "float is faster than double",
+          "double can store integers, float cannot",
+          "float is newer than double"
+        ],
+        "correct": 0,
+        "explanation": "double has higher precision (more decimal places) than float. double uses 64 bits while float uses 32 bits. This gives programmers choice between memory usage and precision."
+      }
+    },
+    {
+      "id": 3,
+      "title": "For Loop",
+      "code": "for (int i = 1; i <= 10; i++) {\n    printf(\"%d\\n\", i);\n}",
+      "language": "c",
+      "description": "C's for loop - much cleaner than FORTRAN's DO loop with line numbers.",
+      "question": {
+        "text": "What does i++ mean in C?",
+        "options": [
+          "Increment i by 1",
+          "Decrement i by 1",
+          "Multiply i by 2",
+          "Divide i by 2"
+        ],
+        "correct": 0,
+        "explanation": "i++ is the increment operator - it adds 1 to i. This shorthand notation (++i also works) made C code more concise and readable compared to older languages."
+      }
+    },
+    {
+      "id": 4,
+      "title": "If-Else Statement",
+      "code": "if (score >= 90) {\n    printf(\"Grade: A\\n\");\n} else if (score >= 80) {\n    printf(\"Grade: B\\n\");\n} else {\n    printf(\"Grade: C\\n\");\n}",
+      "language": "c",
+      "description": "C's conditional statements with modern syntax using curly braces instead of line numbers.",
+      "question": {
+        "text": "What do curly braces {} do in C?",
+        "options": [
+          "Group statements into blocks",
+          "Define arrays",
+          "Create comments",
+          "Import libraries"
+        ],
+        "correct": 0,
+        "explanation": "Curly braces {} group statements into blocks. This replaced FORTRAN's line numbers and made code structure much clearer. Everything inside the braces is treated as one unit."
+      }
+    },
+    {
+      "id": 5,
+      "title": "Function Definition",
+      "code": "int add(int a, int b) {\n    return a + b;\n}\n\nint result = add(5, 3);",
+      "language": "c",
+      "description": "C functions with explicit return types and parameters. Much more structured than FORTRAN subroutines.",
+      "question": {
+        "text": "What does 'int' before 'add' mean?",
+        "options": [
+          "The function returns an integer",
+          "The function takes integer parameters",
+          "The function is internal",
+          "The function is infinite"
+        ],
+        "correct": 0,
+        "explanation": "The 'int' before 'add' specifies that the function returns an integer value. C requires you to declare the return type of every function, making code more predictable and easier to debug."
+      }
+    },
+    {
+      "id": 6,
+      "title": "Array Declaration",
+      "code": "int numbers[10];\nnumbers[0] = 100;\nnumbers[9] = 200;\n\nint matrix[3][4];",
+      "language": "c",
+      "description": "C arrays with square bracket notation. Much simpler than FORTRAN's DIMENSION statement.",
+      "question": {
+        "text": "In C, what is the first index of an array?",
+        "options": [
+          "0",
+          "1",
+          "It depends on the declaration",
+          "It's always 10"
+        ],
+        "correct": 0,
+        "explanation": "C arrays start at index 0, not 1. So a 10-element array has indices 0 through 9. This 'zero-based indexing' became standard in most modern programming languages."
+      }
+    },
+    {
+      "id": 7,
+      "title": "Pointer Basics",
+      "code": "int x = 42;\nint *ptr = &x;\nprintf(\"Value: %d\\n\", *ptr);",
+      "language": "c",
+      "description": "C pointers - one of its most powerful and dangerous features. Pointers store memory addresses.",
+      "question": {
+        "text": "What does &x mean in C?",
+        "options": [
+          "Address of variable x",
+          "Value of variable x",
+          "Reference to variable x",
+          "Pointer to variable x"
+        ],
+        "correct": 0,
+        "explanation": "&x means 'address of x' - it gets the memory location where x is stored. Pointers were revolutionary because they let programmers work directly with memory, enabling efficient data structures and system programming."
+      }
+    },
+    {
+      "id": 8,
+      "title": "String Handling",
+      "code": "char name[20] = \"Hello\";\nstrcpy(name, \"World\");\nprintf(\"Length: %d\\n\", strlen(name));",
+      "language": "c",
+      "description": "C strings are just arrays of characters. String manipulation requires careful memory management.",
+      "question": {
+        "text": "In C, how are strings stored?",
+        "options": [
+          "As arrays of characters",
+          "As special string objects",
+          "As linked lists",
+          "As binary trees"
+        ],
+        "correct": 0,
+        "explanation": "C strings are simply arrays of characters ending with a null character (\\0). This simple approach made C efficient but required careful memory management to avoid buffer overflows."
+      }
+    },
+    {
+      "id": 9,
+      "title": "Structure Definition",
+      "code": "struct Person {\n    char name[50];\n    int age;\n    float height;\n};\n\nstruct Person student;\nstudent.age = 20;",
+      "language": "c",
+      "description": "C structures group related data together - an early form of object-oriented programming.",
+      "question": {
+        "text": "What is the main purpose of a struct in C?",
+        "options": [
+          "To group related data together",
+          "To create functions",
+          "To allocate memory",
+          "To handle errors"
+        ],
+        "correct": 0,
+        "explanation": "Structs group related data together into a single unit. This was a major step toward object-oriented programming - instead of managing separate variables, you could group them logically."
+      }
+    },
+    {
+      "id": 10,
+      "title": "Dynamic Memory Allocation",
+      "code": "int *arr = malloc(10 * sizeof(int));\nif (arr != NULL) {\n    arr[0] = 100;\n    free(arr);\n}",
+      "language": "c",
+      "description": "Dynamic memory allocation - C gives programmers direct control over memory, enabling flexible data structures.",
+      "question": {
+        "text": "What does malloc() do in C?",
+        "options": [
+          "Allocates memory dynamically",
+          "Frees allocated memory",
+          "Copies memory blocks",
+          "Compares memory contents"
+        ],
+        "correct": 0,
+        "explanation": "malloc() allocates memory dynamically at runtime. This was revolutionary - instead of declaring fixed-size arrays, programs could request exactly the memory they needed. But you must free() it when done!"
+      }
+    },
+    {
+      "id": 11,
+      "title": "File Operations",
+      "code": "FILE *file = fopen(\"data.txt\", \"r\");\nif (file != NULL) {\n    char line[100];\n    fgets(line, sizeof(line), file);\n    fclose(file);\n}",
+      "language": "c",
+      "description": "C file operations using FILE pointers. This standardized way of handling files influenced many later languages.",
+      "question": {
+        "text": "What does fopen() return if it fails to open a file?",
+        "options": [
+          "NULL",
+          "0",
+          "-1",
+          "An empty string"
+        ],
+        "correct": 0,
+        "explanation": "fopen() returns NULL if it fails to open the file. This is why you should always check if the file pointer is NULL before using it. C's approach to error handling influenced many programming languages."
+      }
+    },
+    {
+      "id": 12,
+      "title": "Preprocessor Directives",
+      "code": "#define MAX_SIZE 100\n#define PI 3.14159\n\n#ifndef DEBUG\n    #define DEBUG 0\n#endif",
+      "language": "c",
+      "description": "C preprocessor directives - text replacement before compilation. This made C programs more flexible and portable.",
+      "question": {
+        "text": "What does #define do in C?",
+        "options": [
+          "Creates text replacements before compilation",
+          "Defines new data types",
+          "Creates functions",
+          "Imports libraries"
+        ],
+        "correct": 0,
+        "explanation": "#define creates text replacements that happen before compilation. When the compiler sees MAX_SIZE, it replaces it with 100. This made C programs more readable and easier to modify."
+      }
+    }
+  ]
+}
