@@ -1,0 +1,232 @@
+{
+  "name": "FORTRAN",
+  "year": "1957",
+  "description": "The first high-level programming language, created by IBM for scientific and engineering calculations.",
+  "keyFeatures": [
+    "First high-level programming language",
+    "Designed for mathematical and scientific computing",
+    "Formula Translation (FORTRAN) - translates mathematical formulas into machine code",
+    "Fixed-format source code with specific column requirements",
+    "Pioneered concepts like loops, conditionals, and subroutines"
+  ],
+  "historicalContext": "FORTRAN was developed by John Backus and his team at IBM. Before FORTRAN, programmers had to write in assembly language, which was extremely tedious. FORTRAN made programming accessible to scientists and engineers who weren't computer specialists.",
+  "totalFragments": 12,
+  "fragments": [
+    {
+      "id": 1,
+      "title": "Hello World Program",
+      "code": "PROGRAM HELLO\n      PRINT *, 'Hello World'\n      END",
+      "language": "fortran",
+      "description": "The classic first program in FORTRAN. Note the fixed-format structure.",
+      "question": {
+        "text": "What does FORTRAN stand for?",
+        "options": [
+          "Formula Translation",
+          "Forward Translator", 
+          "Fortified Transmission",
+          "First Translation"
+        ],
+        "correct": 0,
+        "explanation": "FORTRAN stands for Formula Translation. It was designed to translate mathematical formulas into machine code, making it easier for scientists and engineers to program computers."
+      }
+    },
+    {
+      "id": 2,
+      "title": "Variable Declaration",
+      "code": "      INTEGER I, J\n      REAL X, Y\n      CHARACTER*10 NAME",
+      "language": "fortran",
+      "description": "FORTRAN variable declarations. Notice the fixed column format and explicit typing.",
+      "question": {
+        "text": "In FORTRAN, what does INTEGER declare?",
+        "options": [
+          "Whole numbers only",
+          "Decimal numbers",
+          "Text strings",
+          "Boolean values"
+        ],
+        "correct": 0,
+        "explanation": "INTEGER in FORTRAN declares variables that can only hold whole numbers (no decimal places). This was important for early computers with limited memory."
+      }
+    },
+    {
+      "id": 3,
+      "title": "DO Loop",
+      "code": "      DO 10 I = 1, 10\n        PRINT *, I\n   10 CONTINUE",
+      "language": "fortran",
+      "description": "The classic FORTRAN DO loop with line numbers for control flow.",
+      "question": {
+        "text": "What does the '10' in 'DO 10 I = 1, 10' represent?",
+        "options": [
+          "The line number to jump to after the loop",
+          "The maximum value for variable I",
+          "The number of iterations",
+          "The starting value for variable I"
+        ],
+        "correct": 0,
+        "explanation": "The '10' is a line number (label) that tells FORTRAN where to jump after the loop completes. This was how control flow worked in early FORTRAN - using line numbers instead of modern block structures."
+      }
+    },
+    {
+      "id": 4,
+      "title": "Conditional Statement",
+      "code": "      IF (X .GT. 0) THEN\n        PRINT *, 'Positive'\n      ELSE\n        PRINT *, 'Negative or Zero'\n      END IF",
+      "language": "fortran",
+      "description": "FORTRAN conditional logic using .GT. (greater than) operator.",
+      "question": {
+        "text": "What does .GT. mean in FORTRAN?",
+        "options": [
+          "Greater Than",
+          "Go To",
+          "Get Text",
+          "Group Type"
+        ],
+        "correct": 0,
+        "explanation": ".GT. stands for 'Greater Than' in FORTRAN. Early FORTRAN used symbolic operators like .GT., .LT. (less than), .EQ. (equal) because keyboards didn't have >, <, = symbols."
+      }
+    },
+    {
+      "id": 5,
+      "title": "Subroutine Definition",
+      "code": "      SUBROUTINE CALCULATE(A, B, RESULT)\n        INTEGER A, B, RESULT\n        RESULT = A + B\n      RETURN\n      END",
+      "language": "fortran",
+      "description": "A FORTRAN subroutine - an early form of function. Note the explicit parameter passing.",
+      "question": {
+        "text": "What is the main purpose of a FORTRAN subroutine?",
+        "options": [
+          "To organize code into reusable blocks",
+          "To store data permanently",
+          "To create user interfaces",
+          "To connect to external devices"
+        ],
+        "correct": 0,
+        "explanation": "Subroutines in FORTRAN (and most programming languages) allow you to organize code into reusable blocks. This was revolutionary in 1957 - before this, all code had to be written linearly."
+      }
+    },
+    {
+      "id": 6,
+      "title": "Array Declaration",
+      "code": "      DIMENSION ARRAY(100)\n      INTEGER ARRAY",
+      "language": "fortran",
+      "description": "Declaring arrays in FORTRAN. Arrays were crucial for scientific calculations.",
+      "question": {
+        "text": "What does DIMENSION do in FORTRAN?",
+        "options": [
+          "Declares the size of an array",
+          "Sets the precision of numbers",
+          "Defines the program structure",
+          "Specifies memory allocation"
+        ],
+        "correct": 0,
+        "explanation": "DIMENSION declares the size of an array. In this example, ARRAY can hold 100 elements. Arrays were essential for scientific computing - imagine calculating with 100 data points instead of just one!"
+      }
+    },
+    {
+      "id": 7,
+      "title": "Mathematical Operations",
+      "code": "      REAL PI, RADIUS, AREA\n      PI = 3.14159\n      AREA = PI * RADIUS**2",
+      "language": "fortran",
+      "description": "Mathematical calculations in FORTRAN. Note the ** operator for exponentiation.",
+      "question": {
+        "text": "What does ** mean in FORTRAN?",
+        "options": [
+          "Exponentiation (power)",
+          "Multiplication",
+          "Comment",
+          "String concatenation"
+        ],
+        "correct": 0,
+        "explanation": "** is the exponentiation operator in FORTRAN. RADIUS**2 means 'radius squared' or 'radius to the power of 2'. This notation is still used in some programming languages today."
+      }
+    },
+    {
+      "id": 8,
+      "title": "Input/Output",
+      "code": "      READ *, NUMBER\n      WRITE(*,*) 'The number is:', NUMBER",
+      "language": "fortran",
+      "description": "Reading input and writing output in FORTRAN.",
+      "question": {
+        "text": "What does READ *, NUMBER do?",
+        "options": [
+          "Reads a number from user input",
+          "Reads a file from disk",
+          "Reads from memory",
+          "Reads from a network connection"
+        ],
+        "correct": 0,
+        "explanation": "READ *, NUMBER reads a number from the user's keyboard input. The * means 'use default formatting'. This was how programs got data from users in the early days of computing."
+      }
+    },
+    {
+      "id": 9,
+      "title": "Nested Loops",
+      "code": "      DO 20 I = 1, 5\n        DO 30 J = 1, 3\n          PRINT *, I, J\n   30   CONTINUE\n   20 CONTINUE",
+      "language": "fortran",
+      "description": "Nested loops in FORTRAN - essential for matrix operations and scientific calculations.",
+      "question": {
+        "text": "How many times will PRINT *, I, J execute in this nested loop?",
+        "options": [
+          "15 times",
+          "8 times",
+          "5 times",
+          "3 times"
+        ],
+        "correct": 0,
+        "explanation": "The outer loop runs 5 times (I = 1 to 5), and for each iteration of the outer loop, the inner loop runs 3 times (J = 1 to 3). So 5 × 3 = 15 total executions."
+      }
+    },
+    {
+      "id": 10,
+      "title": "Common Block",
+      "code": "      COMMON /DATA/ X, Y, Z\n      REAL X, Y, Z",
+      "language": "fortran",
+      "description": "COMMON blocks were FORTRAN's way of sharing data between subroutines - an early form of global variables.",
+      "question": {
+        "text": "What is the purpose of a COMMON block in FORTRAN?",
+        "options": [
+          "To share data between different parts of a program",
+          "To store temporary calculations",
+          "To define program constants",
+          "To handle error conditions"
+        ],
+        "correct": 0,
+        "explanation": "COMMON blocks allow different subroutines to share the same data. This was important before modern programming languages had better ways to pass data around. It's like having a shared workspace."
+      }
+    },
+    {
+      "id": 11,
+      "title": "Format Statement",
+      "code": "      FORMAT(1X, 'Result =', F10.2)\n      WRITE(*, 100) RESULT\n  100 FORMAT(1X, 'Result =', F10.2)",
+      "language": "fortran",
+      "description": "FORMAT statements control how data is displayed - very important for scientific output.",
+      "question": {
+        "text": "What does F10.2 in a FORMAT statement mean?",
+        "options": [
+          "A floating-point number with 10 total digits, 2 after decimal",
+          "A fixed-point number with 10 digits",
+          "A file with 10 records",
+          "A function with 10 parameters"
+        ],
+        "correct": 0,
+        "explanation": "F10.2 means a floating-point number with 10 total characters, showing 2 digits after the decimal point. This precise formatting was crucial for scientific calculations where accuracy matters."
+      }
+    },
+    {
+      "id": 12,
+      "title": "Program End",
+      "code": "      STOP\n      END",
+      "language": "fortran",
+      "description": "How FORTRAN programs end. STOP terminates execution, END marks the end of the program.",
+      "question": {
+        "text": "What is the difference between STOP and END in FORTRAN?",
+        "options": [
+          "STOP terminates execution, END marks program end",
+          "STOP saves data, END clears memory",
+          "STOP starts a loop, END ends a loop",
+          "STOP reads input, END writes output"
+        ],
+        "correct": 0,
+        "explanation": "STOP actually terminates the program execution, while END just marks the end of the program structure. In early FORTRAN, you needed both to properly end a program."
+      }
+    }
+  ]
+}
