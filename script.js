@@ -85,6 +85,8 @@ function handleDigClick(cellIndex) {
     
     // check if already excavated
     if (cell.classList.contains('excavated')) {
+        // if already excavated, show fragment details
+        showFragmentDetails(cellIndex);
         return;
     }
     
@@ -93,29 +95,43 @@ function handleDigClick(cellIndex) {
 }
 
 function excavateCell(cell, cellIndex) {
-    // mark as excavated
-    cell.classList.add('excavated');
+    // add digging animation
+    cell.style.transform = 'scale(0.8)';
+    cell.style.opacity = '0.5';
     
-    // simulate finding a code fragment
-    const fragmentFound = simulateFragmentDiscovery(cellIndex);
-    
-    if (fragmentFound) {
-        // update fragment count
-        fragmentsFound.push(cellIndex);
+    // simulate digging delay
+    setTimeout(function() {
+        // mark as excavated
+        cell.classList.add('excavated');
         
-        // update display
-        updateDisplay();
+        // simulate finding a code fragment
+        const fragmentFound = simulateFragmentDiscovery(cellIndex);
         
-        // show fragment content (placeholder for now)
-        showFragmentContent(cellIndex);
+        if (fragmentFound) {
+            // update fragment count
+            fragmentsFound.push(cellIndex);
+            
+            // update display
+            updateDisplay();
+            
+            // show fragment content
+            showFragmentContent(cellIndex);
+            
+            // save progress
+            saveGameProgress();
+            
+            console.log(`fragment found at cell ${cellIndex}`);
+        } else {
+            // empty dig site
+            cell.textContent = 'X';
+            cell.style.color = '#808080';
+            console.log(`empty dig site at cell ${cellIndex}`);
+        }
         
-        console.log(`fragment found at cell ${cellIndex}`);
-    } else {
-        // empty dig site
-        cell.textContent = 'X';
-        cell.style.color = '#808080';
-        console.log(`empty dig site at cell ${cellIndex}`);
-    }
+        // reset animation
+        cell.style.transform = 'scale(1)';
+        cell.style.opacity = '1';
+    }, 300);
 }
 
 function simulateFragmentDiscovery(cellIndex) {
@@ -125,11 +141,22 @@ function simulateFragmentDiscovery(cellIndex) {
 }
 
 function showFragmentContent(cellIndex) {
-    // placeholder - will show actual code fragments later
+    // show fragment indicator
     const cell = digSiteGrid.children[cellIndex];
     cell.textContent = 'CODE';
     cell.style.color = '#00ffff';
     cell.title = 'Code fragment found! Click to examine.';
+    
+    // add click handler for fragment details
+    cell.addEventListener('click', function() {
+        showFragmentDetails(cellIndex);
+    });
+}
+
+function showFragmentDetails(cellIndex) {
+    // placeholder for fragment details modal
+    console.log(`showing details for fragment at cell ${cellIndex}`);
+    alert(`Fragment details for cell ${cellIndex} - This will be replaced with actual code fragments and questions!`);
 }
 
 function updateDisplay() {
