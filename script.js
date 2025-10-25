@@ -342,8 +342,15 @@ function handleAnswerSelection(selectedIndex, question) {
         feedbackText.style.color = '#ff0040';
     }
     
-    // show explanation
-    explanationText.textContent = question.explanation;
+    // show explanation with better formatting
+    explanationText.innerHTML = `
+        <div style="margin-bottom: 10px;">
+            <strong>Explanation:</strong>
+        </div>
+        <div style="line-height: 1.5;">
+            ${question.explanation}
+        </div>
+    `;
     
     // show feedback section
     feedbackSection.classList.remove('hidden');
