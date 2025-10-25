@@ -6,6 +6,7 @@ let score = 0;
 let unlockedEras = ['fortran'];
 let totalFragments = 0;
 let gameState = {};
+let currentEraData = null;
 
 // dom elements
 let digSiteGrid;
@@ -31,6 +32,9 @@ function initializeGame() {
     progressFill = document.getElementById('progress-fill');
     progressText = document.getElementById('progress-text');
     
+    // load era data
+    loadEraData();
+    
     // create dig site grid
     createDigSiteGrid();
     
@@ -41,6 +45,29 @@ function initializeGame() {
     updateDisplay();
     
     console.log('game initialized');
+}
+
+async function loadEraData() {
+    try {
+        // load all era data files
+        const fortranResponse = await fetch('data/fortran.json');
+        const cResponse = await fetch('data/c.json');
+        const pythonResponse = await fetch('data/python.json');
+        
+        eraData.fortran = await fortranResponse.json();
+        eraData.c = await cResponse.json();
+        eraData.python = await pythonResponse.json();
+        
+        // set current era data
+        currentEraData = eraData[currentEra];
+        totalFragments = currentEraData.totalFragments;
+        
+        console.log('era data loaded successfully');
+    } catch (error) {
+        console.error('error loading era data:', error);
+        // fallback to default values
+        totalFragments = 12;
+    }
 }
 
 function createDigSiteGrid() {
@@ -140,8 +167,18 @@ function excavateCell(cell, cellIndex) {
 }
 
 function simulateFragmentDiscovery(cellIndex) {
-    // simple probability - 70% chance of finding fragment
-    // in real implementation, this will use actual era data
+    // check if this cell should contain a fragment based on era data
+    if (currentEraData && currentEraData.fragments) {
+        // each cell has a chance to contain a fragment
+        // distribute fragments across the grid
+        const fragmentCount = currentEraData.fragments.length;
+        const gridSize = 12; // 4x3 grid
+        const fragmentProbability = fragmentCount / gridSize;
+        
+        return Math.random() < fragmentProbability;
+    }
+    
+    // fallback to simple probability
     return Math.random() < 0.7;
 }
 
