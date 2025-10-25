@@ -148,22 +148,111 @@ function simulateFragmentDiscovery(cellIndex) {
 }
 
 function showFragmentContent(cellIndex) {
-    // show fragment indicator
+    // show fragment indicator with better visual feedback
     const cell = digSiteGrid.children[cellIndex];
     cell.textContent = 'CODE';
     cell.style.color = '#00ffff';
+    cell.style.fontWeight = 'bold';
+    cell.style.textShadow = '0 0 10px #00ffff';
     cell.title = 'Code fragment found! Click to examine.';
+    
+    // add pulsing effect
+    cell.style.animation = 'glow 2s infinite';
     
     // add click handler for fragment details
     cell.addEventListener('click', function() {
         showFragmentDetails(cellIndex);
     });
+    
+    // show brief notification
+    showFragmentNotification(cellIndex);
+}
+
+function showFragmentNotification(cellIndex) {
+    // create temporary notification
+    const notification = document.createElement('div');
+    notification.textContent = 'Code Fragment Discovered!';
+    notification.style.cssText = `
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background: rgba(0, 255, 255, 0.9);
+        color: #0a0a0a;
+        padding: 10px 20px;
+        border: 2px solid #00ffff;
+        font-family: 'Courier New', monospace;
+        font-weight: bold;
+        z-index: 1500;
+        animation: fadeInOut 2s ease-in-out;
+    `;
+    
+    document.body.appendChild(notification);
+    
+    // remove notification after animation
+    setTimeout(function() {
+        if (notification.parentNode) {
+            notification.parentNode.removeChild(notification);
+        }
+    }, 2000);
 }
 
 function showFragmentDetails(cellIndex) {
     // placeholder for fragment details modal
     console.log(`showing details for fragment at cell ${cellIndex}`);
-    alert(`Fragment details for cell ${cellIndex} - This will be replaced with actual code fragments and questions!`);
+    
+    // create simple modal for now
+    const modal = document.createElement('div');
+    modal.style.cssText = `
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.8);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 2000;
+    `;
+    
+    const content = document.createElement('div');
+    content.style.cssText = `
+        background: #0a0a0a;
+        border: 2px solid #ffb000;
+        padding: 20px;
+        max-width: 500px;
+        width: 90%;
+        color: #00ffff;
+        font-family: 'Courier New', monospace;
+    `;
+    
+    content.innerHTML = `
+        <h3 style="color: #ffb000; margin-bottom: 15px;">Code Fragment #${cellIndex + 1}</h3>
+        <div style="background: #404040; padding: 15px; margin-bottom: 15px; border: 1px solid #00ff00;">
+            <pre style="color: #00ffff; margin: 0;">// Sample code fragment
+PROGRAM HELLO
+      PRINT *, 'Hello World'
+      END</pre>
+        </div>
+        <p style="color: #ffffff; margin-bottom: 15px;">
+            This is a placeholder code fragment. In the next phase, we'll load real code fragments from JSON data files.
+        </p>
+        <button onclick="this.parentElement.parentElement.parentElement.removeChild(this.parentElement.parentElement)" 
+                style="background: #00ff00; color: #0a0a0a; border: none; padding: 10px 20px; font-family: 'Courier New', monospace; cursor: pointer;">
+            Close
+        </button>
+    `;
+    
+    modal.appendChild(content);
+    document.body.appendChild(modal);
+    
+    // close on click outside
+    modal.addEventListener('click', function(e) {
+        if (e.target === modal) {
+            document.body.removeChild(modal);
+        }
+    });
 }
 
 function updateDisplay() {

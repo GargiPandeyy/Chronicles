@@ -506,6 +506,13 @@ body::before {
     50% { box-shadow: 0 0 20px rgba(0, 255, 0, 0.8); }
 }
 
+@keyframes fadeInOut {
+    0% { opacity: 0; transform: translate(-50%, -50%) scale(0.8); }
+    20% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+    80% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+    100% { opacity: 0; transform: translate(-50%, -50%) scale(0.8); }
+}
+
 .dig-cell.excavated {
     animation: glow 2s infinite;
 }
