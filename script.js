@@ -246,61 +246,72 @@ function showFragmentNotification(cellIndex) {
 }
 
 function showFragmentDetails(cellIndex) {
-    // placeholder for fragment details modal
-    console.log(`showing details for fragment at cell ${cellIndex}`);
+    const cell = digSiteGrid.children[cellIndex];
+    const fragmentId = cell.dataset.fragmentId;
     
-    // create simple modal for now
-    const modal = document.createElement('div');
-    modal.style.cssText = `
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: rgba(0, 0, 0, 0.8);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        z-index: 2000;
-    `;
+    // get fragment data
+    const fragmentData = getFragmentDataForCell(cellIndex);
+    if (!fragmentData) {
+        console.log('no fragment data found');
+        return;
+    }
     
-    const content = document.createElement('div');
-    content.style.cssText = `
-        background: #0a0a0a;
-        border: 2px solid #ffb000;
-        padding: 20px;
-        max-width: 500px;
-        width: 90%;
-        color: #00ffff;
-        font-family: 'Courier New', monospace;
-    `;
+    // show question modal
+    showQuestionModal(fragmentData);
+}
+
+function showQuestionModal(fragmentData) {
+    const modal = document.getElementById('question-modal');
+    const codeDisplay = document.getElementById('question-code');
+    const questionText = document.getElementById('question-text');
+    const optionsContainer = document.getElementById('question-options');
+    const feedbackSection = document.getElementById('answer-feedback');
     
-    content.innerHTML = `
-        <h3 style="color: #ffb000; margin-bottom: 15px;">Code Fragment #${cellIndex + 1}</h3>
-        <div style="background: #404040; padding: 15px; margin-bottom: 15px; border: 1px solid #00ff00;">
-            <pre style="color: #00ffff; margin: 0;">// Sample code fragment
-PROGRAM HELLO
-      PRINT *, 'Hello World'
-      END</pre>
-        </div>
-        <p style="color: #ffffff; margin-bottom: 15px;">
-            This is a placeholder code fragment. In the next phase, we'll load real code fragments from JSON data files.
-        </p>
-        <button onclick="this.parentElement.parentElement.parentElement.removeChild(this.parentElement.parentElement)" 
-                style="background: #00ff00; color: #0a0a0a; border: none; padding: 10px 20px; font-family: 'Courier New', monospace; cursor: pointer;">
-            Close
-        </button>
-    `;
+    // hide feedback section initially
+    feedbackSection.classList.add('hidden');
     
-    modal.appendChild(content);
-    document.body.appendChild(modal);
+    // display code fragment
+    codeDisplay.textContent = fragmentData.code;
+    
+    // display question
+    questionText.textContent = fragmentData.question.text;
+    
+    // create options
+    optionsContainer.innerHTML = '';
+    fragmentData.question.options.forEach((option, index) => {
+        const optionBtn = document.createElement('button');
+        optionBtn.className = 'option-btn';
+        optionBtn.textContent = option;
+        optionBtn.dataset.optionIndex = index;
+        
+        optionBtn.addEventListener('click', function() {
+            handleAnswerSelection(index, fragmentData.question);
+        });
+        
+        optionsContainer.appendChild(optionBtn);
+    });
+    
+    // show modal
+    modal.classList.remove('hidden');
+    
+    // add close functionality
+    const closeBtn = document.getElementById('close-modal');
+    const continueBtn = document.getElementById('continue-btn');
+    
+    closeBtn.onclick = function() {
+        modal.classList.add('hidden');
+    };
+    
+    continueBtn.onclick = function() {
+        modal.classList.add('hidden');
+    };
     
     // close on click outside
-    modal.addEventListener('click', function(e) {
+    modal.onclick = function(e) {
         if (e.target === modal) {
-            document.body.removeChild(modal);
+            modal.classList.add('hidden');
         }
-    });
+    };
 }
 
 function updateDisplay() {
