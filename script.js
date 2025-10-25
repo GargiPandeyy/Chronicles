@@ -95,42 +95,49 @@ function handleDigClick(cellIndex) {
 }
 
 function excavateCell(cell, cellIndex) {
-    // add digging animation
-    cell.style.transform = 'scale(0.8)';
-    cell.style.opacity = '0.5';
+    // add digging animation class
+    cell.classList.add('digging');
     
     // simulate digging delay
     setTimeout(function() {
+        // remove digging animation
+        cell.classList.remove('digging');
+        
+        // add dust clearing effect
+        cell.classList.add('dust-clearing');
+        
         // mark as excavated
         cell.classList.add('excavated');
         
         // simulate finding a code fragment
         const fragmentFound = simulateFragmentDiscovery(cellIndex);
         
-        if (fragmentFound) {
-            // update fragment count
-            fragmentsFound.push(cellIndex);
+        setTimeout(function() {
+            // remove dust clearing effect
+            cell.classList.remove('dust-clearing');
             
-            // update display
-            updateDisplay();
-            
-            // show fragment content
-            showFragmentContent(cellIndex);
-            
-            // save progress
-            saveGameProgress();
-            
-            console.log(`fragment found at cell ${cellIndex}`);
-        } else {
-            // empty dig site
-            cell.textContent = 'X';
-            cell.style.color = '#808080';
-            console.log(`empty dig site at cell ${cellIndex}`);
-        }
+            if (fragmentFound) {
+                // update fragment count
+                fragmentsFound.push(cellIndex);
+                
+                // update display
+                updateDisplay();
+                
+                // show fragment content
+                showFragmentContent(cellIndex);
+                
+                // save progress
+                saveGameProgress();
+                
+                console.log(`fragment found at cell ${cellIndex}`);
+            } else {
+                // empty dig site
+                cell.textContent = 'X';
+                cell.style.color = '#808080';
+                console.log(`empty dig site at cell ${cellIndex}`);
+            }
+        }, 400);
         
-        // reset animation
-        cell.style.transform = 'scale(1)';
-        cell.style.opacity = '1';
     }, 300);
 }
 
