@@ -369,6 +369,12 @@ function loadGameProgress() {
             score = data.score || 0;
             unlockedEras = data.unlockedEras || ['fortran'];
             
+            // update current era data if it changed
+            if (eraData[currentEra]) {
+                currentEraData = eraData[currentEra];
+                totalFragments = currentEraData.totalFragments;
+            }
+            
             console.log('progress loaded from localStorage');
         } catch (e) {
             console.log('error loading progress:', e);
@@ -382,7 +388,8 @@ function saveGameProgress() {
         currentEra: currentEra,
         fragmentsFound: fragmentsFound,
         score: score,
-        unlockedEras: unlockedEras
+        unlockedEras: unlockedEras,
+        timestamp: Date.now()
     };
     
     localStorage.setItem('codeArchaeologyProgress', JSON.stringify(data));
