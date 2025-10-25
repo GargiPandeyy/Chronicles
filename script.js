@@ -194,6 +194,10 @@ function showFragmentContent(cellIndex) {
     // add pulsing effect
     cell.style.animation = 'glow 2s infinite';
     
+    // store fragment data
+    const fragmentData = getFragmentDataForCell(cellIndex);
+    cell.dataset.fragmentId = fragmentData ? fragmentData.id : cellIndex;
+    
     // add click handler for fragment details
     cell.addEventListener('click', function() {
         showFragmentDetails(cellIndex);
@@ -201,6 +205,15 @@ function showFragmentContent(cellIndex) {
     
     // show brief notification
     showFragmentNotification(cellIndex);
+}
+
+function getFragmentDataForCell(cellIndex) {
+    // get a random fragment from current era data
+    if (currentEraData && currentEraData.fragments) {
+        const fragmentIndex = cellIndex % currentEraData.fragments.length;
+        return currentEraData.fragments[fragmentIndex];
+    }
+    return null;
 }
 
 function showFragmentNotification(cellIndex) {
@@ -294,8 +307,8 @@ function updateDisplay() {
     // update fragment count
     fragmentsFoundDisplay.textContent = fragmentsFound.length;
     
-    // update total fragments (placeholder - will be set from era data)
-    totalFragmentsDisplay.textContent = totalFragments || 12;
+    // update total fragments
+    totalFragmentsDisplay.textContent = totalFragments;
     
     // update score
     currentScoreDisplay.textContent = score;
@@ -305,6 +318,19 @@ function updateDisplay() {
     
     // update progress bar
     updateProgressBar();
+    
+    // update era description
+    updateEraDescription();
+}
+
+function updateEraDescription() {
+    const eraDescriptionElement = document.getElementById('era-description');
+    if (eraDescriptionElement && currentEraData) {
+        eraDescriptionElement.innerHTML = `
+            <p><strong>${currentEraData.name} (${currentEraData.year})</strong></p>
+            <p>${currentEraData.description}</p>
+        `;
+    }
 }
 
 function getEraDisplayName(era) {
