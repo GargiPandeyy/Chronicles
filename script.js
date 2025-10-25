@@ -581,6 +581,10 @@ function buildMuseumContent() {
                     <span class="stat-value">${getAccuracyPercentage()}%</span>
                 </div>
             </div>
+            <div class="timeline-section">
+                <h3 style="color: #00ffff; margin-bottom: 15px;">📅 Programming History Timeline</h3>
+                ${buildTimeline()}
+            </div>
         </div>
     `;
     
@@ -645,9 +649,39 @@ function buildEraSection(era) {
     return content;
 }
 
-function getAccuracyPercentage() {
-    if (statistics.totalQuestionsAnswered === 0) return 0;
-    return Math.round((statistics.correctAnswers / statistics.totalQuestionsAnswered) * 100);
+function buildTimeline() {
+    const timelineData = [
+        { year: '1957', name: 'FORTRAN', description: 'First high-level language', unlocked: unlockedEras.includes('fortran') },
+        { year: '1972', name: 'C', description: 'System programming language', unlocked: unlockedEras.includes('c') },
+        { year: '1991', name: 'Python', description: 'Modern readable language', unlocked: unlockedEras.includes('python') }
+    ];
+    
+    let timeline = '<div class="timeline">';
+    
+    timelineData.forEach((item, index) => {
+        const isUnlocked = item.unlocked;
+        const isCurrent = item.name.toLowerCase() === currentEra;
+        const timelineClass = `timeline-item ${isUnlocked ? 'unlocked' : 'locked'} ${isCurrent ? 'current' : ''}`;
+        
+        timeline += `
+            <div class="${timelineClass}">
+                <div class="timeline-year">${item.year}</div>
+                <div class="timeline-content">
+                    <div class="timeline-name">${item.name}</div>
+                    <div class="timeline-description">${item.description}</div>
+                    ${isUnlocked ? '<div class="timeline-status">✓ Unlocked</div>' : '<div class="timeline-status">🔒 Locked</div>'}
+                </div>
+            </div>
+        `;
+        
+        // add connector line (except for last item)
+        if (index < timelineData.length - 1) {
+            timeline += '<div class="timeline-connector"></div>';
+        }
+    });
+    
+    timeline += '</div>';
+    return timeline;
 }
 
 function showHelp() {

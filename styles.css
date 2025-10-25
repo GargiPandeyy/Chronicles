@@ -593,6 +593,92 @@ body::before {
     line-height: 1.4;
 }
 
+/* Timeline Styles */
+.timeline-section {
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px solid var(--terminal-gray);
+}
+
+.timeline {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+.timeline-item {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    border-radius: 5px;
+    transition: all 0.3s ease;
+}
+
+.timeline-item.unlocked {
+    background: rgba(0, 255, 0, 0.1);
+    border: 1px solid var(--terminal-green);
+}
+
+.timeline-item.locked {
+    background: rgba(128, 128, 128, 0.1);
+    border: 1px solid var(--terminal-gray);
+    opacity: 0.6;
+}
+
+.timeline-item.current {
+    background: rgba(0, 255, 255, 0.1);
+    border: 1px solid var(--terminal-cyan);
+    box-shadow: 0 0 10px rgba(0, 255, 255, 0.3);
+}
+
+.timeline-year {
+    background: var(--terminal-dark-gray);
+    color: var(--terminal-amber);
+    padding: 8px 12px;
+    border-radius: 3px;
+    font-weight: bold;
+    font-size: var(--font-size-small);
+    min-width: 60px;
+    text-align: center;
+    margin-right: 15px;
+}
+
+.timeline-content {
+    flex: 1;
+}
+
+.timeline-name {
+    color: var(--terminal-white);
+    font-weight: bold;
+    font-size: var(--font-size-base);
+    margin-bottom: 3px;
+}
+
+.timeline-description {
+    color: var(--terminal-gray);
+    font-size: var(--font-size-small);
+    margin-bottom: 3px;
+}
+
+.timeline-status {
+    color: var(--terminal-green);
+    font-size: var(--font-size-small);
+    font-weight: bold;
+}
+
+.timeline-item.locked .timeline-status {
+    color: var(--terminal-gray);
+}
+
+.timeline-connector {
+    height: 20px;
+    width: 2px;
+    background: var(--terminal-gray);
+    margin-left: 30px;
+    opacity: 0.5;
+}
+
 /* Responsive Design */
 @media (max-width: 768px) {
     .game-main {
