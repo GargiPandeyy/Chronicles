@@ -7,6 +7,12 @@ let unlockedEras = ['fortran'];
 let totalFragments = 0;
 let gameState = {};
 let currentEraData = null;
+let statistics = {
+    totalQuestionsAnswered: 0,
+    correctAnswers: 0,
+    incorrectAnswers: 0,
+    fragmentsCollected: 0
+};
 
 // dom elements
 let digSiteGrid;
@@ -332,15 +338,19 @@ function handleAnswerSelection(selectedIndex, question) {
     // check if answer is correct
     const isCorrect = selectedIndex === question.correct;
     
-    // update score
+    // update score and statistics
     if (isCorrect) {
         score += 10;
+        statistics.correctAnswers++;
         feedbackText.textContent = 'Correct! +10 points';
         feedbackText.style.color = '#00ff00';
     } else {
+        statistics.incorrectAnswers++;
         feedbackText.textContent = 'Incorrect! No points';
         feedbackText.style.color = '#ff0040';
     }
+    
+    statistics.totalQuestionsAnswered++;
     
     // show explanation with better formatting
     explanationText.innerHTML = `
@@ -429,6 +439,12 @@ function loadGameProgress() {
             fragmentsFound = data.fragmentsFound || [];
             score = data.score || 0;
             unlockedEras = data.unlockedEras || ['fortran'];
+            statistics = data.statistics || {
+                totalQuestionsAnswered: 0,
+                correctAnswers: 0,
+                incorrectAnswers: 0,
+                fragmentsCollected: 0
+            };
             
             // update current era data if it changed
             if (eraData[currentEra]) {
@@ -450,6 +466,7 @@ function saveGameProgress() {
         fragmentsFound: fragmentsFound,
         score: score,
         unlockedEras: unlockedEras,
+        statistics: statistics,
         timestamp: Date.now()
     };
     
