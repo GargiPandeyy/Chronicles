@@ -314,6 +314,49 @@ function showQuestionModal(fragmentData) {
     };
 }
 
+function handleAnswerSelection(selectedIndex, question) {
+    const optionsContainer = document.getElementById('question-options');
+    const feedbackSection = document.getElementById('answer-feedback');
+    const feedbackText = document.getElementById('feedback-text');
+    const explanationText = document.getElementById('explanation-text');
+    
+    // disable all option buttons
+    const optionButtons = optionsContainer.querySelectorAll('.option-btn');
+    optionButtons.forEach(btn => {
+        btn.disabled = true;
+        if (parseInt(btn.dataset.optionIndex) === selectedIndex) {
+            btn.classList.add('selected');
+        }
+    });
+    
+    // check if answer is correct
+    const isCorrect = selectedIndex === question.correct;
+    
+    // update score
+    if (isCorrect) {
+        score += 10;
+        feedbackText.textContent = 'Correct! +10 points';
+        feedbackText.style.color = '#00ff00';
+    } else {
+        feedbackText.textContent = 'Incorrect! No points';
+        feedbackText.style.color = '#ff0040';
+    }
+    
+    // show explanation
+    explanationText.textContent = question.explanation;
+    
+    // show feedback section
+    feedbackSection.classList.remove('hidden');
+    
+    // save progress
+    saveGameProgress();
+    
+    // update display
+    updateDisplay();
+    
+    console.log(`answer selected: ${selectedIndex}, correct: ${question.correct}, isCorrect: ${isCorrect}`);
+}
+
 function updateDisplay() {
     // update fragment count
     fragmentsFoundDisplay.textContent = fragmentsFound.length;
