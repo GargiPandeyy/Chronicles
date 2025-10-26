@@ -945,6 +945,81 @@ function showAchievement(title, description) {
     }, 4000);
 }
 
+function showHelp() {
+    const modal = document.createElement('div');
+    modal.style.cssText = `
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.9);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 3000;
+        padding: 20px;
+    `;
+    
+    const content = document.createElement('div');
+    content.style.cssText = `
+        background: var(--terminal-bg);
+        border: 2px solid var(--terminal-green);
+        padding: 30px;
+        max-width: 600px;
+        width: 100%;
+        color: var(--terminal-green);
+        font-family: var(--font-mono);
+        line-height: 1.6;
+    `;
+    
+    content.innerHTML = `
+        <h2 style="color: var(--terminal-amber); margin-bottom: 20px; text-align: center;">🎮 How to Play Code Archaeology</h2>
+        
+        <div style="margin-bottom: 20px;">
+            <h3 style="color: var(--terminal-cyan);">Objective</h3>
+            <p>Excavate code fragments from different programming eras and learn about the evolution of programming languages!</p>
+        </div>
+        
+        <div style="margin-bottom: 20px;">
+            <h3 style="color: var(--terminal-cyan);">How to Play</h3>
+            <ol style="padding-left: 20px;">
+                <li><strong>Dig:</strong> Click on grid cells to excavate code fragments</li>
+                <li><strong>Answer:</strong> When you find a fragment, answer the question about it</li>
+                <li><strong>Learn:</strong> Read explanations to understand programming history</li>
+                <li><strong>Progress:</strong> Complete all fragments in an era to unlock the next</li>
+                <li><strong>Explore:</strong> Visit the Museum to see all your discoveries</li>
+            </ol>
+        </div>
+        
+        <div style="margin-bottom: 20px;">
+            <h3 style="color: var(--terminal-cyan);">Eras</h3>
+            <ul style="padding-left: 20px;">
+                <li><strong>FORTRAN (1957):</strong> The first high-level programming language</li>
+                <li><strong>C (1972):</strong> System programming and portability</li>
+                <li><strong>Python (1991):</strong> Modern, readable programming</li>
+            </ul>
+        </div>
+        
+        <div style="text-align: center; margin-top: 30px;">
+            <button onclick="this.parentElement.parentElement.parentElement.removeChild(this.parentElement.parentElement)" 
+                    style="background: var(--terminal-green); color: var(--terminal-bg); border: none; padding: 10px 20px; font-family: var(--font-mono); cursor: pointer;">
+                Got it!
+            </button>
+        </div>
+    `;
+    
+    modal.appendChild(content);
+    document.body.appendChild(modal);
+    
+    // close on click outside
+    modal.addEventListener('click', function(e) {
+        if (e.target === modal) {
+            document.body.removeChild(modal);
+        }
+    });
+}
+
 // add event listeners for action buttons
 document.addEventListener('DOMContentLoaded', function() {
     // these will be added after the buttons exist
