@@ -13,6 +13,7 @@ let statistics = {
     incorrectAnswers: 0,
     fragmentsCollected: 0
 };
+let soundEnabled = true;
 
 // dom elements
 let digSiteGrid;
@@ -129,6 +130,9 @@ function excavateCell(cell, cellIndex) {
     // add digging animation class
     cell.classList.add('digging');
     
+    // play dig sound
+    playSound('dig');
+    
     // simulate digging delay
     setTimeout(function() {
         // remove digging animation
@@ -148,6 +152,9 @@ function excavateCell(cell, cellIndex) {
             cell.classList.remove('dust-clearing');
             
             if (fragmentFound) {
+                // play found sound
+                playSound('found');
+                
                 // update fragment count
                 fragmentsFound.push(cellIndex);
                 
@@ -344,10 +351,12 @@ function handleAnswerSelection(selectedIndex, question) {
         statistics.correctAnswers++;
         feedbackText.textContent = 'Correct! +10 points';
         feedbackText.style.color = '#00ff00';
+        playSound('correct');
     } else {
         statistics.incorrectAnswers++;
         feedbackText.textContent = 'Incorrect! No points';
         feedbackText.style.color = '#ff0040';
+        playSound('incorrect');
     }
     
     statistics.totalQuestionsAnswered++;
@@ -440,6 +449,7 @@ function checkEraUnlocking() {
         if (!unlockedEras.includes(nextEra)) {
             unlockedEras.push(nextEra);
             showEraUnlockedNotification(nextEra);
+            playSound('unlock');
             saveGameProgress();
         }
     }
@@ -794,6 +804,64 @@ function buildComparisonGrid(comparisons) {
     });
     
     return grid;
+}
+
+// sound system
+function playSound(type) {
+    if (!soundEnabled) return;
+    
+    const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+    const oscillator = audioContext.createOscillator();
+    const gainNode = audioContext.createGain();
+    
+    oscillator.connect(gainNode);
+    gainNode.connect(audioContext.destination);
+    
+    // set frequency and duration based on sound type
+    let frequency, duration;
+    switch(type) {
+        case 'dig':
+            frequency = 200;
+            duration = 0.1;
+            break;
+        case 'found':
+            frequency = 800;
+            duration = 0.3;
+            break;
+        case 'correct':
+            frequency = 600;
+            duration = 0.2;
+            break;
+        case 'incorrect':
+            frequency = 200;
+            duration = 0.3;
+            break;
+        case 'unlock':
+            frequency = 1000;
+            duration = 0.5;
+            break;
+        default:
+            frequency = 440;
+            duration = 0.1;
+    }
+    
+    oscillator.frequency.setValueAtTime(frequency, audioContext.currentTime);
+    oscillator.type = 'square';
+    
+    gainNode.gain.setValueAtTime(0.1, audioContext.currentTime);
+    gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + duration);
+    
+    oscillator.start(audioContext.currentTime);
+    oscillator.stop(audioContext.currentTime + duration);
+}
+
+function toggleSound() {
+    soundEnabled = !soundEnabled;
+    const soundBtn = document.getElementById('sound-btn');
+    if (soundBtn) {
+        soundBtn.textContent = soundEnabled ? '🔊 Sound On' : '🔇 Sound Off';
+    }
+    console.log('sound', soundEnabled ? 'enabled' : 'disabled');
 }
 
 // add event listeners for action buttons
