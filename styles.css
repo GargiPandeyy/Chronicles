@@ -782,3 +782,25 @@ body::before {
 .comment { color: var(--terminal-gray); }
 .number { color: var(--terminal-cyan); }
 .function { color: var(--terminal-blue); }
+
+/* Bomb Cell Styles */
+.dig-cell.bomb {
+    background: var(--terminal-red) !important;
+    animation: explosion 0.5s ease-out;
+    box-shadow: 0 0 20px rgba(255, 0, 0, 0.8);
+}
+
+@keyframes explosion {
+    0% {
+        transform: scale(1);
+        opacity: 1;
+    }
+    50% {
+        transform: scale(1.2);
+        opacity: 0.8;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
