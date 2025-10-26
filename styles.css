@@ -593,6 +593,54 @@ body::before {
     line-height: 1.4;
 }
 
+.fragment-actions {
+    margin-top: 10px;
+}
+
+.compare-btn {
+    background: var(--terminal-purple);
+    color: var(--terminal-bg);
+    border: none;
+    padding: 6px 12px;
+    font-family: var(--font-mono);
+    font-size: var(--font-size-small);
+    cursor: pointer;
+    border-radius: 3px;
+    transition: all 0.3s ease;
+}
+
+.compare-btn:hover {
+    background: var(--terminal-cyan);
+    box-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+}
+
+.comparison-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+}
+
+.comparison-item {
+    background: var(--terminal-dark-gray);
+    border: 1px solid var(--terminal-blue);
+    padding: 15px;
+    border-radius: 5px;
+}
+
+.comparison-header {
+    margin-bottom: 10px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--terminal-gray);
+}
+
+.comparison-code {
+    background: var(--terminal-bg);
+    border: 1px solid var(--terminal-green);
+    padding: 10px;
+    border-radius: 3px;
+    margin-bottom: 10px;
+}
+
 /* Timeline Styles */
 .timeline-section {
     margin-top: 20px;

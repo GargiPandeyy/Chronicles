@@ -635,6 +635,11 @@ function buildEraSection(era) {
                         <pre>${fragment.code}</pre>
                     </div>
                     <div class="fragment-description">${fragment.description}</div>
+                    <div class="fragment-actions">
+                        <button class="compare-btn" onclick="showCodeComparison('${era}', ${index})">
+                            Compare Across Eras
+                        </button>
+                    </div>
                 </div>
             `;
         });
@@ -684,8 +689,111 @@ function buildTimeline() {
     return timeline;
 }
 
-function showHelp() {
-    console.log('help system - to be implemented');
+function showCodeComparison(era, fragmentIndex) {
+    const fragment = eraData[era].fragments[fragmentIndex];
+    const fragmentTitle = fragment.title;
+    
+    // find similar fragments across eras
+    const comparisons = findSimilarFragments(fragmentTitle);
+    
+    // create comparison modal
+    const modal = document.createElement('div');
+    modal.style.cssText = `
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.9);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 3000;
+        padding: 20px;
+    `;
+    
+    const content = document.createElement('div');
+    content.style.cssText = `
+        background: var(--terminal-bg);
+        border: 2px solid var(--terminal-amber);
+        padding: 20px;
+        max-width: 1000px;
+        width: 100%;
+        max-height: 80vh;
+        overflow-y: auto;
+        color: var(--terminal-green);
+        font-family: var(--font-mono);
+    `;
+    
+    content.innerHTML = `
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+            <h2 style="color: var(--terminal-amber); margin: 0;">Code Evolution: ${fragmentTitle}</h2>
+            <button onclick="this.parentElement.parentElement.parentElement.removeChild(this.parentElement.parentElement)" 
+                    style="background: var(--terminal-red); color: var(--terminal-bg); border: none; padding: 8px 15px; cursor: pointer;">
+                Close
+            </button>
+        </div>
+        <div class="comparison-grid">
+            ${buildComparisonGrid(comparisons)}
+        </div>
+    `;
+    
+    modal.appendChild(content);
+    document.body.appendChild(modal);
+    
+    // close on click outside
+    modal.addEventListener('click', function(e) {
+        if (e.target === modal) {
+            document.body.removeChild(modal);
+        }
+    });
+}
+
+function findSimilarFragments(title) {
+    const comparisons = [];
+    const eraOrder = ['fortran', 'c', 'python'];
+    
+    eraOrder.forEach(era => {
+        if (eraData[era]) {
+            const fragment = eraData[era].fragments.find(f => 
+                f.title.toLowerCase().includes(title.toLowerCase()) ||
+                title.toLowerCase().includes(f.title.toLowerCase())
+            );
+            
+            if (fragment) {
+                comparisons.push({
+                    era: era,
+                    eraName: eraData[era].name,
+                    year: eraData[era].year,
+                    fragment: fragment
+                });
+            }
+        }
+    });
+    
+    return comparisons;
+}
+
+function buildComparisonGrid(comparisons) {
+    let grid = '';
+    
+    comparisons.forEach(comparison => {
+        grid += `
+            <div class="comparison-item">
+                <div class="comparison-header">
+                    <h3 style="color: var(--terminal-cyan); margin: 0;">${comparison.eraName} (${comparison.year})</h3>
+                </div>
+                <div class="comparison-code">
+                    <pre style="color: var(--terminal-cyan); margin: 0; font-size: 12px;">${comparison.fragment.code}</pre>
+                </div>
+                <div class="comparison-description">
+                    <p style="color: var(--terminal-white); margin: 10px 0 0 0; font-size: 12px;">${comparison.fragment.description}</p>
+                </div>
+            </div>
+        `;
+    });
+    
+    return grid;
 }
 
 // add event listeners for action buttons
