@@ -14,6 +14,13 @@ let statistics = {
     fragmentsCollected: 0
 };
 let soundEnabled = true;
+let achievements = {
+    firstDig: false,
+    firstFragment: false,
+    perfectEra: false,
+    allEras: false,
+    highScore: false
+};
 
 // dom elements
 let digSiteGrid;
@@ -157,6 +164,9 @@ function excavateCell(cell, cellIndex) {
                 
                 // update fragment count
                 fragmentsFound.push(cellIndex);
+                
+                // check achievements
+                checkAchievements();
                 
                 // update display
                 updateDisplay();
@@ -862,6 +872,77 @@ function toggleSound() {
         soundBtn.textContent = soundEnabled ? '🔊 Sound On' : '🔇 Sound Off';
     }
     console.log('sound', soundEnabled ? 'enabled' : 'disabled');
+}
+
+function checkAchievements() {
+    // first dig achievement
+    if (!achievements.firstDig) {
+        achievements.firstDig = true;
+        showAchievement('First Dig', 'You made your first excavation!');
+    }
+    
+    // first fragment achievement
+    if (!achievements.firstFragment && fragmentsFound.length >= 1) {
+        achievements.firstFragment = true;
+        showAchievement('Code Discoverer', 'You found your first code fragment!');
+    }
+    
+    // perfect era achievement
+    if (!achievements.perfectEra && fragmentsFound.length >= totalFragments) {
+        achievements.perfectEra = true;
+        showAchievement('Era Master', 'You completed an entire programming era!');
+    }
+    
+    // all eras achievement
+    if (!achievements.allEras && unlockedEras.length >= 3) {
+        achievements.allEras = true;
+        showAchievement('Programming Historian', 'You unlocked all programming eras!');
+    }
+    
+    // high score achievement
+    if (!achievements.highScore && score >= 100) {
+        achievements.highScore = true;
+        showAchievement('High Scorer', 'You reached 100 points!');
+    }
+}
+
+function showAchievement(title, description) {
+    const notification = document.createElement('div');
+    notification.innerHTML = `
+        <div style="text-align: center;">
+            <h3 style="color: #ffb000; margin-bottom: 10px;">🏆 Achievement Unlocked!</h3>
+            <h4 style="color: #00ffff; margin-bottom: 5px;">${title}</h4>
+            <p style="color: #ffffff; margin: 0;">${description}</p>
+        </div>
+    `;
+    notification.style.cssText = `
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        background: rgba(0, 0, 0, 0.95);
+        color: #00ff00;
+        padding: 20px;
+        border: 3px solid #ffb000;
+        font-family: 'Courier New', monospace;
+        z-index: 3000;
+        max-width: 300px;
+        box-shadow: 0 0 20px rgba(255, 176, 0, 0.5);
+        animation: slideIn 0.5s ease-out;
+    `;
+    
+    document.body.appendChild(notification);
+    
+    // remove notification after 4 seconds
+    setTimeout(function() {
+        if (notification.parentNode) {
+            notification.style.animation = 'slideOut 0.5s ease-in';
+            setTimeout(function() {
+                if (notification.parentNode) {
+                    notification.parentNode.removeChild(notification);
+                }
+            }, 500);
+        }
+    }, 4000);
 }
 
 // add event listeners for action buttons
