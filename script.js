@@ -463,6 +463,118 @@ function checkEraUnlocking() {
             saveGameProgress();
         }
     }
+    
+    // check if all eras are completed
+    if (unlockedEras.length >= 3) {
+        checkGameCompletion();
+    }
+}
+
+function checkGameCompletion() {
+    // check if all eras have been completed (all fragments found)
+    const allErasCompleted = unlockedEras.length >= 3;
+    
+    if (allErasCompleted) {
+        // show completion screen after a delay
+        setTimeout(function() {
+            showGameCompletionScreen();
+        }, 2000);
+    }
+}
+
+function showGameCompletionScreen() {
+    const modal = document.createElement('div');
+    modal.style.cssText = `
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.95);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 4000;
+        padding: 20px;
+    `;
+    
+    const content = document.createElement('div');
+    content.style.cssText = `
+        background: var(--terminal-bg);
+        border: 3px solid var(--terminal-amber);
+        padding: 40px;
+        max-width: 700px;
+        width: 100%;
+        color: var(--terminal-green);
+        font-family: var(--font-mono);
+        text-align: center;
+        box-shadow: 0 0 50px rgba(255, 176, 0, 0.5);
+    `;
+    
+    const accuracy = getAccuracyPercentage();
+    const totalFragments = fragmentsFound.length;
+    
+    content.innerHTML = `
+        <h1 style="color: var(--terminal-amber); font-size: 32px; margin-bottom: 20px;">🎉 Congratulations! 🎉</h1>
+        <h2 style="color: var(--terminal-cyan); margin-bottom: 30px;">You've completed Code Archaeology!</h2>
+        
+        <div style="background: var(--terminal-dark-gray); padding: 20px; margin-bottom: 30px; border: 1px solid var(--terminal-green);">
+            <h3 style="color: var(--terminal-white); margin-bottom: 15px;">Final Statistics</h3>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 15px;">
+                <div>
+                    <div style="color: var(--terminal-gray); font-size: 14px;">Total Score</div>
+                    <div style="color: var(--terminal-cyan); font-size: 24px; font-weight: bold;">${score}</div>
+                </div>
+                <div>
+                    <div style="color: var(--terminal-gray); font-size: 14px;">Fragments Found</div>
+                    <div style="color: var(--terminal-cyan); font-size: 24px; font-weight: bold;">${totalFragments}</div>
+                </div>
+                <div>
+                    <div style="color: var(--terminal-gray); font-size: 14px;">Accuracy</div>
+                    <div style="color: var(--terminal-cyan); font-size: 24px; font-weight: bold;">${accuracy}%</div>
+                </div>
+                <div>
+                    <div style="color: var(--terminal-gray); font-size: 14px;">Eras Completed</div>
+                    <div style="color: var(--terminal-cyan); font-size: 24px; font-weight: bold;">${unlockedEras.length}</div>
+                </div>
+            </div>
+        </div>
+        
+        <div style="margin-bottom: 30px;">
+            <h3 style="color: var(--terminal-white); margin-bottom: 15px;">🏆 Achievements Unlocked</h3>
+            <div style="display: flex; justify-content: center; gap: 20px; flex-wrap: wrap;">
+                ${Object.entries(achievements).map(([key, unlocked]) => 
+                    `<div style="color: ${unlocked ? 'var(--terminal-green)' : 'var(--terminal-gray)'}; font-size: 14px;">
+                        ${unlocked ? '✓' : '✗'} ${key.replace(/([A-Z])/g, ' $1').replace(/^./, str => str.toUpperCase())}
+                    </div>`
+                ).join('')}
+            </div>
+        </div>
+        
+        <div style="margin-bottom: 30px;">
+            <p style="color: var(--terminal-white); font-size: 16px; line-height: 1.5;">
+                You've successfully excavated the history of programming! From FORTRAN's pioneering days to Python's modern elegance, 
+                you've discovered how programming languages evolved and shaped our digital world.
+            </p>
+        </div>
+        
+        <div style="display: flex; gap: 15px; justify-content: center;">
+            <button onclick="location.reload()" 
+                    style="background: var(--terminal-green); color: var(--terminal-bg); border: none; padding: 12px 24px; font-family: var(--font-mono); cursor: pointer; font-size: 16px;">
+                Play Again
+            </button>
+            <button onclick="this.parentElement.parentElement.parentElement.removeChild(this.parentElement.parentElement)" 
+                    style="background: var(--terminal-blue); color: var(--terminal-bg); border: none; padding: 12px 24px; font-family: var(--font-mono); cursor: pointer; font-size: 16px;">
+                Continue Exploring
+            </button>
+        </div>
+    `;
+    
+    modal.appendChild(content);
+    document.body.appendChild(modal);
+    
+    // play completion sound
+    playSound('unlock');
 }
 
 function showEraUnlockedNotification(nextEra) {
