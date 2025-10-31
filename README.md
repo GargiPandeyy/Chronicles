@@ -1,47 +1,36 @@
 # Code Archaeology Game
 
-## Overview
-
-Welcome to Code Archaeology, an educational game where you become a digital archaeologist excavating the history of programming languages! Discover ancient code fragments from different programming eras and learn how computer programming evolved over time.
+discover ancient code fragments from different programming eras and learn how computer programming evolved over time.
 
 ## How to Play
 
-1. **Dig for Artifacts**: Click on the dig site to excavate hidden code fragments
-2. **Answer Questions**: After finding each fragment, answer questions about the code
-3. **Learn History**: Discover how programming languages evolved from FORTRAN to modern languages
-4. **Unlock Eras**: Complete all fragments in an era to unlock the next programming period
-5. **Build Your Museum**: Collect and organize all discovered code artifacts
+1. **Dig for Artifacts**
+2. **Answer Questions**
+3. **Learn History**
+4. **Unlock Eras**
+5. **Build Your Museum**
 
 ## Programming Eras
 
-- **FORTRAN (1957)**: The first high-level programming language
-- **C (1972)**: The foundation of modern systems programming  
-- **Python (1991)**: Modern, readable programming language
+- **FORTRAN (1957)**
+- **C (1972)**
+- **Python (1991)**
 
-## Educational Goals
+## Stack
 
-- Learn programming language history and evolution
-- Understand syntax differences across eras
-- Recognize programming patterns and concepts
-- Appreciate the development of computer science
+Built with vanilla HTML, CSS, and JavaScript.
 
-## Game Features
+i made this cause i love the history of computer science and how it evolved from so level language to such high level language like python so i thought let's create a game based on this. 
 
-- Interactive dig site with click-to-excavate mechanics
-- Code fragment collection and museum view
-- Multiple choice questions with explanations
-- Progressive era unlocking system
-- Retro terminal aesthetic
-- Local progress saving
+the hardest parts of building this game were implementing the minesweeper algorithm from scratch (learning Fisher-Yates shuffle, grid coordinate logic, and ensuring safe first clicks), managing complex game state across multiple systems (eras, fragments, quizzes, achievements) without bugs where modals duplicated or state reset unexpectedly, and understanding async/await for loading JSON data files with promises. 
 
-## Technical Details
+the Web Audio API was completely new - creating sounds with oscillators instead of audio files - and dynamic DOM manipulation for programmatic modal creation, proper event listener cleanup, and z-index management took lots of debugging. localStorage for persistence taught me JSON serialization and data structure design. This project pushed me way beyond my comfort zone, especially debugging interactions between different game systems and tracking state across 2000+ lines of code.
 
-Built with vanilla HTML, CSS, and JavaScript. No external dependencies required.
+it was quite tough but i keep on learning and commenting writing the code in proper industry standard way and learning all the way.
 
-## Getting Started
-
-Simply open `index.html` in your web browser to start your archaeological adventure!
+Simply open `index.html` in your web browser(to run it locally after forking it :)) 
 
 ---
+built by GargiPandeyy
 
-*"In the digital sands of time, every line of code tells a story..."*
+[![Athena Award Badge](https://img.shields.io/endpoint?url=https%3A%2F%2Faward.athena.hackclub.com%2Fapi%2Fbadge)](https://award.athena.hackclub.com?utm_source=readme)
